@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: validating-webhook-cert
+  namespace: default
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  secretName: validating-webhook-tls  # Secret name where cert-manager will store certs
+  duration: 365m  # Valid for 365 days
+  renewBefore: 30m  # Renew 30 days before expiration
+  subject:
+    organizations:
+      - webhook-org
+  commonName: validating-webhook-service.default.svc
+  dnsNames:
+    - validating-webhook-service.default.svc
+    - validating-webhook-service.default.svc.cluster.local
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
