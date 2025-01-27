@@ -4,7 +4,7 @@ metadata:
   name: validating-webhook-cert
   annotations:
     argocd.argoproj.io/sync-wave: "4"  # Deploy after pod is running
-    cert-manager.io/inject-ca-from: default/validating-webhook-cert
+    cert-manager.io/inject-ca-from-secret: default/example-ca
 webhooks:
   - name: validating-webhook-service.default.svc
     rules:
