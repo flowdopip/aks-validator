@@ -2,6 +2,8 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: pod-label-validation
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"  # Deploy after pod is running
 webhooks:
   - name: pod-label-validator.default.svc
     rules:
