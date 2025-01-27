@@ -9,11 +9,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: validating-webhook
+      app: web
   template:
     metadata:
       labels:
-        app: validating-webhook
+        app: web
     spec:
       containers:
       - name: webhook
@@ -40,5 +40,8 @@ spec:
   ports:
     - port: 443
       targetPort: 8443
+      protocol: TCP
+      name: https-webhook
   selector:
-    app: validating-webhook
+    app: web
+  type: ClusterIP
