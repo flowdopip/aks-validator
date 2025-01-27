@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: validating-webhook
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: validating-webhook
+  template:
+    metadata:
+      labels:
+        app: validating-webhook
+    spec:
+      containers:
+      - name: webhook
+        image: flowdopip/validating-webhook:latest
+        ports:
+        - containerPort: 8443
+        volumeMounts:
+          - name: webhook-certs
+            mountPath: "/etc/webhook/certs"
+            readOnly: true
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: webhook-tls-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: validating-webhook-service
+  namespace: default
+spec:
+  ports:
+    - port: 443
+      targetPort: 8443
+  selector:
+    app: validating-webhook
