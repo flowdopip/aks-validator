@@ -27,7 +27,7 @@ spec:
       volumes:
         - name: webhook-certs
           secret:
-            secretName: webhook-tls-secret
+            secretName: validating-webhook-tls
 ---
 apiVersion: v1
 kind: Service
