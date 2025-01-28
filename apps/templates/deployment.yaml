@@ -4,7 +4,7 @@ metadata:
   name: validating-webhook
   namespace: default
   annotations:
-    argocd.argoproj.io/sync-wave: "1"  # Deploy after pod is running
+    argocd.argoproj.io/sync-wave: "3"  # Deploy after pod is running
 spec:
   replicas: 1
   selector:
@@ -35,7 +35,7 @@ metadata:
   name: validating-webhook-service
   namespace: default
   annotations:
-    argocd.argoproj.io/sync-wave: "2"  # Deploy after pod is running
+    argocd.argoproj.io/sync-wave: "4"  # Deploy after pod is running
 spec:
   ports:
     - port: 443
